@@ -127,7 +127,7 @@ class Question(models.Model):
     # Indicate if this choice of the question is a correct one or not
     # Other fields and methods you would like to design
 class Choice(models.Model):
-    question = models.ManToManyField(Question)
+    question = models.ManyToManyField(Question)
     choice = models.TextField()
     correct = models.BooleanField()
 
