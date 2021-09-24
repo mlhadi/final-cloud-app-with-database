@@ -127,9 +127,9 @@ class Question(models.Model):
     # Indicate if this choice of the question is a correct one or not
     # Other fields and methods you would like to design
 class Choice(models.Model):
-    question = models.ManyToManyField(Question)
-    choice = models.TextField()
-    correct = models.BooleanField()
+    question_id = models.ForeignKey(Question, on_delete=models.CASCADE, default=-1)
+    choice_text = models.TextField()
+    is_correct = models.BooleanField()
 
 # <HINT> The submission model
 # One enrollment could have multiple submission
