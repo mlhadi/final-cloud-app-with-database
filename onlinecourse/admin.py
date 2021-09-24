@@ -34,7 +34,7 @@ class LessonAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    pass
+    inlines = [ChoiceInline]
 
 
 class ChoiceAdmin(admin.ModelAdmin):
