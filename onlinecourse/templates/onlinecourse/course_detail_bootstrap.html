@@ -62,8 +62,34 @@
                 </div>
 
             -->
-
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#exam">Simple collapsible</button>
+            <div id="exam" class="collapse">
             <!-- <HINT> If user is authenticated, show course exam with a list of question -->
+            {% if user.is_authenticated %}
+            <form id="questionform" action="point to a submit view" method="post">
+                <div>
+                {% for question in user.question %}
+                    <div><h5>{{ question.question_text }}</h5></div>
+                    {% csrf_token %}
+                    <div class="form-group">
+                    {% for choice in question.choice %}
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="choice_{{choice.id}}"
+                                       class="form-check-input" id="{{choice.id}}"
+                                       value="{{choice.id}}">{{ choice.choice_text }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endfor %}
+                </div>
+                <input class="btn btn-success btn-block" type="submit" value="Submit">
+            </form>
+            {% else %}
+            <h5>Log in to see the questions.</h5>
+            {% endif %}
+            </div>
 
             <!-- <HINT> Each example will have many questions -->
 
