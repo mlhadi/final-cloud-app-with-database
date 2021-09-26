@@ -66,13 +66,14 @@
             <div id="exam" class="collapse">
             <!-- <HINT> If user is authenticated, show course exam with a list of question -->
             {% if user.is_authenticated %}
-            <form id="questionform" action="point to a submit view" method="post">
+            <!--form id="questionform" action={# url 'onlinecourse:show_exam_result' course.id #} method="post" --!>
+            <form id="questionform" action="{% url 'onlinecourse:submit' course.id %}" method="post">
                 <div>
-                {% for question in user.question %}
+                {% for question in course.question_set.all %}
                     <div><h5>{{ question.question_text }}</h5></div>
                     {% csrf_token %}
                     <div class="form-group">
-                    {% for choice in question.choice %}
+                    {% for choice in question.choice_set.all %}
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="checkbox" name="choice_{{choice.id}}"
